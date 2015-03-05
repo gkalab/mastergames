@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Master Games</string>
+    <string name="app_description">This is a collection of more than 200,000 master games.\n\nIn order to view these games select \'Search master games\' from within the Chess PGN Master app.</string>
+    <string name="action_license">License</string>
+    <string name="install">Install Chess PGN Master</string>
+    <string name="start">Start Chess PGN Master</string>
+    <string name="license">License: GPLv2, source is available here: https://code.google.com/p/mastergames/</string>
+
+</resources>
