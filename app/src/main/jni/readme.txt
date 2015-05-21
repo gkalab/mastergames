@@ -1,1 +1,0 @@
-use the source from https://scidonthego.googlecode.com/svn/trunk/jni/ here

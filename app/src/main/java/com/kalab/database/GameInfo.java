@@ -7,6 +7,8 @@ public class GameInfo {
     private String round = "";
     private String white = "";
     private String black = "";
+    private String whiteElo = "";
+    private String blackElo = "";
     private String result = "";
     private String pgn = "";
     private int id = -1;
@@ -71,6 +73,10 @@ public class GameInfo {
                 return "" + isFavorite;
             case 13:
                 return "" + isDeleted;
+            case 14:
+                return whiteElo;
+            case 15:
+                return blackElo;
             default:
                 return null;
         }
@@ -193,5 +199,21 @@ public class GameInfo {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public String getWhiteElo() {
+        return whiteElo;
+    }
+
+    public void setWhiteElo(String whiteElo) {
+        this.whiteElo = whiteElo;
+    }
+
+    public String getBlackElo() {
+        return blackElo;
+    }
+
+    public void setBlackElo(String blackElo) {
+        this.blackElo = blackElo;
     }
 }
