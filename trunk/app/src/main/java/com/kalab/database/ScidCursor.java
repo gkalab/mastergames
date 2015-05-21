@@ -253,6 +253,8 @@ public class ScidCursor extends AbstractCursor {
                 gameInfo.setPgn(loadPGN ? new String(DataBase.getPGN(),
                         DataBase.SCID_ENCODING) : null);
             }
+            gameInfo.setWhiteElo("" + DataBase.getWhiteElo());
+            gameInfo.setBlackElo("" + DataBase.getBlackElo());
         } catch (UnsupportedEncodingException e) {
             Log.e("SCID", "Error converting byte[] to String", e);
         }

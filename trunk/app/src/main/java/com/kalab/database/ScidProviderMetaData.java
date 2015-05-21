@@ -27,9 +27,11 @@ public class ScidProviderMetaData {
         public static final String CURRENT_PLY = "current_ply";
         public static final String IS_FAVORITE = "is_favorite";
         public static final String IS_DELETED = "is_deleted";
+        public static final String WHITE_ELO = "white_elo";
+        public static final String BLACK_ELO = "black_elo";
         public static final String[] columns = new String[]{_ID, EVENT, SITE,
                 DATE, ROUND, WHITE, BLACK, RESULT, PGN, SUMMARY, CURRENT_PLY,
-                DETAILS, IS_FAVORITE, IS_DELETED};
+                DETAILS, IS_FAVORITE, IS_DELETED, WHITE_ELO, BLACK_ELO};
 
         private ScidMetaData() {
         }

@@ -1,0 +1,1 @@
+use the source from https://scidonthego.googlecode.com/svn/trunk/jni/scid/ here
