@@ -1,0 +1,1 @@
+This app is a content provider for chess games.
