@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -17,7 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+public class MainActivity extends AppCompatActivity {
 
     public static final String PGN_MASTER_ID = "com.kalab.pgnviewer";
 
@@ -26,8 +28,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.container,
-                    new PlaceholderFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
         }
     }
 
@@ -39,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void updateButtonText(Intent intent) {
-        Button button = (Button) findViewById(R.id.startButton);
+        Button button = findViewById(R.id.startButton);
         if (button != null) {
             if (intent != null) {
                 button.setText(getText(R.string.start));
@@ -52,9 +53,11 @@ public class MainActivity extends ActionBarActivity {
     public void onButtonClick(View view) {
         Intent intent = getPackageManager().getLaunchIntentForPackage(PGN_MASTER_ID);
         if (intent == null) {
-            Intent appIntent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=" + PGN_MASTER_ID));
-            startActivity(appIntent);
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PGN_MASTER_ID)));
+            } catch (android.content.ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + PGN_MASTER_ID)));
+            }
         } else {
             startActivity(intent);
             finish();
@@ -79,8 +82,7 @@ public class MainActivity extends ActionBarActivity {
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setMessage(message).create();
             dialog.show();
-            ((TextView) dialog.findViewById(android.R.id.message))
-                    .setMovementMethod(LinkMovementMethod.getInstance());
+            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
 
             return true;
         }
@@ -93,11 +95,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container,
-                    false);
-            return rootView;
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.fragment_main, container, false);
         }
     }
 }

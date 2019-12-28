@@ -244,7 +244,7 @@ JCM(jintArray, getMatchingNames, jint nameType, jstring jprefix){
         for(uint i = 0; i < numNames; ++i)
             matches[i] = i;
     }
-    LOGD("getNames: got %d", matches.size());
+    //LOGD("getNames: got %d", matches.size());
 
     CaseCmp caseCmp = {nameType};
     sort(matches.begin(), matches.end(), caseCmp);

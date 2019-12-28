@@ -2,6 +2,7 @@ package com.kalab.database;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.content.pm.PackageManager;
@@ -28,10 +29,8 @@ public class ScidProvider extends ContentProvider {
 
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        sUriMatcher.addURI(ScidProviderMetaData.AUTHORITY, "games",
-                INCOMING_GAME_COLLECTION_URI_INDICATOR);
-        sUriMatcher.addURI(ScidProviderMetaData.AUTHORITY, "games/#",
-                INCOMING_SINGLE_GAME_URI_INDICATOR);
+        sUriMatcher.addURI(ScidProviderMetaData.AUTHORITY, "games", INCOMING_GAME_COLLECTION_URI_INDICATOR);
+        sUriMatcher.addURI(ScidProviderMetaData.AUTHORITY, "games/#", INCOMING_SINGLE_GAME_URI_INDICATOR);
     }
 
     private static final int SELECTION_COUNT_BOARD_SEARCH = 3;
@@ -44,20 +43,25 @@ public class ScidProvider extends ContentProvider {
     }
 
     private void copyAssetsToFilesDir() {
-        AssetManager assetManager = getContext().getAssets();
-        String[] files = null;
-        try {
-            files = assetManager.list(DB_FOLDER);
-        } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
-        }
-
-        boolean needsUpdate = !isUpToDate();
-        for (String fileName : files) {
-            updateFile(assetManager, fileName, needsUpdate);
-        }
-        if (needsUpdate) {
-            setCurrentVersion();
+        final Context context = getContext();
+        if (context != null) {
+            AssetManager assetManager = context.getAssets();
+            if (assetManager != null) {
+                try {
+                    boolean needsUpdate = !isUpToDate();
+                    final String[] files = assetManager.list(DB_FOLDER);
+                    if (files != null) {
+                        for (String fileName : files) {
+                            updateFile(assetManager, fileName, needsUpdate);
+                        }
+                        if (needsUpdate) {
+                            setCurrentVersion();
+                        }
+                    }
+                } catch (IOException e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
         }
     }
 
@@ -97,8 +101,7 @@ public class ScidProvider extends ContentProvider {
     }
 
     private void setCurrentVersion() {
-        SharedPreferences preferences = PreferenceManager
-                .getDefaultSharedPreferences(getContext());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(CURRENT_VERSION_KEY, getCurrentAppVersion());
         editor.commit();
@@ -120,10 +123,6 @@ public class ScidProvider extends ContentProvider {
             Log.v(TAG, e.getMessage());
         }
         return result;
-    }
-
-    private File getFileInFilesDir(String fileName) {
-        return new File(getContext().getFilesDir(), fileName);
     }
 
 
@@ -152,7 +151,7 @@ public class ScidProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String fileName,
                         String[] selectionArgs, String sortOrder) {
-        ScidCursor result = null;
+        ScidCursor result;
         switch (sUriMatcher.match(uri)) {
             case INCOMING_GAME_COLLECTION_URI_INDICATOR:
                 result = createCursorForGameCollection(projection, fileName, selectionArgs, sortOrder);
@@ -178,6 +177,10 @@ public class ScidProvider extends ContentProvider {
             throw new IllegalArgumentException(
                     "The scid file name must be specified as the selection.");
         }
+    }
+
+    private File getFileInFilesDir(String fileName) {
+        return new File(getContext().getFilesDir(), fileName);
     }
 
     private ScidCursor createCursorForGameCollection(String[] projection, String fileName, String[] selectionArgs, String sortOrder) {
