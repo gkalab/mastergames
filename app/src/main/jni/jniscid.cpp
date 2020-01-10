@@ -469,7 +469,7 @@ JCM(jstring, importPgn, jstring jpgnName, jobject progress){
 
         if(nb.AddName(NAME_PLAYER, game.GetWhiteStr(), &id) != OK){
             resultString.append("Too many names: ");
-            resultString.append(NAME_PLAYER);
+            resultString.append(game.GetWhiteStr());
             goto cleanup;
         }
         nb.IncFrequency(NAME_PLAYER, id, 1);
@@ -477,7 +477,7 @@ JCM(jstring, importPgn, jstring jpgnName, jobject progress){
 
         if(nb.AddName(NAME_PLAYER, game.GetBlackStr(), &id) != OK){
             resultString.append("Too many names: ");
-            resultString.append(NAME_PLAYER);
+            resultString.append(game.GetBlackStr());
             goto cleanup;
         }
         nb.IncFrequency(NAME_PLAYER, id, 1);
@@ -485,7 +485,7 @@ JCM(jstring, importPgn, jstring jpgnName, jobject progress){
 
         if(nb.AddName(NAME_EVENT, game.GetEventStr(), &id) != OK){
             resultString.append("Too many names: ");
-            resultString.append(NAME_TYPE_STRING [NAME_EVENT]);
+            resultString.append(game.GetEventStr());
             goto cleanup;
         }
         nb.IncFrequency(NAME_EVENT, id, 1);
@@ -493,7 +493,7 @@ JCM(jstring, importPgn, jstring jpgnName, jobject progress){
 
         if(nb.AddName(NAME_SITE, game.GetSiteStr(), &id) != OK){
             resultString.append("Too many names: ");
-            resultString.append(NAME_TYPE_STRING [NAME_SITE]);
+            resultString.append(game.GetSiteStr());
             goto cleanup;
         }
         nb.IncFrequency(NAME_SITE, id, 1);
@@ -501,7 +501,7 @@ JCM(jstring, importPgn, jstring jpgnName, jobject progress){
 
         if(nb.AddName(NAME_ROUND, game.GetRoundStr(), &id) != OK){
             resultString.append("Too many names: ");
-            resultString.append(NAME_TYPE_STRING [NAME_ROUND]);
+            resultString.append(game.GetRoundStr());
             goto cleanup;
         }
         nb.IncFrequency(NAME_ROUND, id, 1);

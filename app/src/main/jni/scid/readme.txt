@@ -1,1 +1,0 @@
-use the source from https://github.com/gkalab/scidonthego/tree/master/scidOnTheGo/src/main/jni/scid here
