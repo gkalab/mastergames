@@ -627,6 +627,7 @@ Position::Init (Game * owner)
 
     // Make sure all tables used for move generation, hashing,
     // square tests, etc have been computed:
+    scid_Init();
     initHashValues();
 }
 

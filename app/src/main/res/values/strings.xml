@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Master Games</string>
-    <string name="app_description">This is a collection of more than 250,000 master games.\n\nIn order to view these games select \'Search master games\' from within the Chess PGN Master app.</string>
+    <string name="app_description">This is a collection of more than 290,000 master games.\n\nIn order to view these games select \'Search master games\' from within the Chess PGN Master app.</string>
     <string name="action_license">License</string>
     <string name="install">Install Chess PGN Master</string>
     <string name="start">Start Chess PGN Master</string>
