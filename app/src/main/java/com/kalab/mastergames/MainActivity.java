@@ -82,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setMessage(message).create();
             dialog.show();
-            ((TextView) dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-
+            final TextView messageView = dialog.findViewById(android.R.id.message);
+            if (messageView != null) {
+                messageView.setMovementMethod(LinkMovementMethod.getInstance());
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

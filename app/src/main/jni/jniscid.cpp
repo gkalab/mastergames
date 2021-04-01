@@ -906,6 +906,9 @@ JCM(jboolean, searchHeader,
         }
 
         if(ecoActive){
+            if (ie->GetStartFlag()){
+                goto no_match;
+            }
             ecoT eco = ie->GetEcoCode();
             if(eco == ECO_None){
                 CI(allowEcoNone);

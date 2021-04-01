@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kalab.mastergames"
-    android:versionCode="14"
-    android:versionName="1.14" >
+    android:versionCode="19"
+    android:versionName="1.19" >
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -25,4 +26,7 @@
             android:exported="true" />
     </application>
 
+    <queries>
+        <package android:name="com.kalab.pgnviewer" />
+    </queries>
 </manifest>

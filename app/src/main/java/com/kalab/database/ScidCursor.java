@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class ScidCursor extends AbstractCursor {
-    private static String TAG = ScidCursor.class.getSimpleName();
+    private static final String TAG = ScidCursor.class.getSimpleName();
     private static GameFilter gameFilter;
     private int count;
     private GameInfo gameInfo;
@@ -49,7 +49,7 @@ public class ScidCursor extends AbstractCursor {
 
     private void init(String fileName, String[] projection, int startPosition, int limit) {
         this.limit = limit;
-        this.singleGame = limit == 1 ? true : false;
+        this.singleGame = limit == 1;
         DataBase.loadFile(fileName);
         this.count = DataBase.getSize();
         this.startPosition = startPosition;
@@ -104,8 +104,8 @@ public class ScidCursor extends AbstractCursor {
         request.round = selectionArgs[10];
         String dateFrom = selectionArgs[11];
         String dateTo = selectionArgs[12];
-        //request.ecoFrom = selectionArgs[13];
-        //request.ecoTo = selectionArgs[14];
+        request.ecoFrom = selectionArgs[13];
+        request.ecoTo = selectionArgs[14];
         request.dateMin = SearchHeaderRequest.makeDate(getYearFromDate(dateFrom, 0),
                 getMonthFromDate(dateFrom, 1), getDayFromDate(dateFrom, 1));
         request.dateMax = SearchHeaderRequest.makeDate(getYearFromDate(dateTo, 9999),
